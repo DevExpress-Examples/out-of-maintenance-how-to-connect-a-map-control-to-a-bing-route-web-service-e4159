@@ -32,9 +32,9 @@ Namespace DXMap_RouteProvider
 				End If
 				Dim line As MapPolyline = TryCast(item, MapPolyline)
 				If line IsNot Nothing Then
-					line.Fill = Brushes.Red
-					line.Stroke = Brushes.Red
-				End If
+                    line.Fill = System.Windows.Media.Brushes.Red
+                    line.Stroke = System.Windows.Media.Brushes.Red
+                End If
 			Next item
             map.ZoomToFit(args.Items)
         End Sub
