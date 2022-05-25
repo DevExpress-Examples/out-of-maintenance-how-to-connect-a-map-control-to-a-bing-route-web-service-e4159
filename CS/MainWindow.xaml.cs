@@ -1,16 +1,15 @@
 ﻿using DevExpress.Xpf.Map;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Windows;
-using System.Windows.Input;
+using System.Windows.Media;
 
 namespace DXMap_RouteProvider {
 
     public partial class MainWindow : Window {
-        #region #CalculateRoute
+   
         public MainWindow() {
             InitializeComponent();
-            
+
             // Create three waypoints and add them to a route waypoints list. 
             List<RouteWaypoint> waypoints = new List<RouteWaypoint>();
             waypoints.Add(new RouteWaypoint("New York", new GeoPoint(41.145556, -73.995)));
@@ -22,14 +21,18 @@ namespace DXMap_RouteProvider {
 
         private void routeProvider_LayerItemsGenerating(object sender, LayerItemsGeneratingEventArgs args) {
             char letter = 'A';
-            
             foreach (MapItem item in args.Items) {
                 MapPushpin pushpin = item as MapPushpin;
                 if (pushpin != null)
                     pushpin.Text = letter++.ToString();
+                MapPolyline line = item as MapPolyline;
+                if (line != null) {
+                    line.Fill = Brushes.Red;
+                    line.Stroke = Brushes.Red;
+                }
             }
-        }
 
-        #endregion #CalculateRoute
+            map.ZoomToFit(args.Items);
+        }
     }
 }
