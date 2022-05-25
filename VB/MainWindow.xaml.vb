@@ -9,8 +9,7 @@ Namespace DXMap_RouteProvider
 	Partial Public Class MainWindow
 		Inherits Window
 
-		#Region "#CalculateRoute"
-		Public Sub New()
+        Public Sub New()
 			InitializeComponent()
 
 			' Create three waypoints and add them to a route waypoints list. 
@@ -28,14 +27,16 @@ Namespace DXMap_RouteProvider
 			For Each item As MapItem In args.Items
 				Dim pushpin As MapPushpin = TryCast(item, MapPushpin)
 				If pushpin IsNot Nothing Then
-'INSTANT VB WARNING: An assignment within expression was extracted from the following statement:
-'ORIGINAL LINE: pushpin.Text = letter++.ToString();
 					pushpin.Text = letter.ToString()
 					letter = ChrW(AscW(letter) + 1)
 				End If
+				Dim line As MapPolyline = TryCast(item, MapPolyline)
+				If line IsNot Nothing Then
+					line.Fill = Brushes.Red
+					line.Stroke = Brushes.Red
+				End If
 			Next item
-		End Sub
-
-		#End Region ' #CalculateRoute
+            map.ZoomToFit(args.Items)
+        End Sub
 	End Class
 End Namespace
