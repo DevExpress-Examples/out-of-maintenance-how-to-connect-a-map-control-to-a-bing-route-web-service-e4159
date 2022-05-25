@@ -8,22 +8,20 @@
         <sys:String x:Key="YourBingKey">Your Bing Key</sys:String>
     </Window.Resources>
     <Grid>
-        <dxm:MapControl>
+        <dxm:MapControl x:Name="map">
             <dxm:ImageTilesLayer>
                 <dxm:ImageTilesLayer.DataProvider>
                     <dxm:BingMapDataProvider BingKey="{Binding Source={StaticResource YourBingKey}}" />
                 </dxm:ImageTilesLayer.DataProvider>
             </dxm:ImageTilesLayer>
-            <!--region #Routing-->
-            <dxm:InformationLayer EnableHighlighting="False"
-                                  >
+
+            <dxm:InformationLayer EnableHighlighting="False">
                 <dxm:InformationLayer.DataProvider>
                     <dxm:BingRouteDataProvider x:Name="routeProvider" 
                                                BingKey="{Binding Source={StaticResource YourBingKey}}"
                                                LayerItemsGenerating="routeProvider_LayerItemsGenerating"/>
                 </dxm:InformationLayer.DataProvider>
             </dxm:InformationLayer>
-            <!--endregion #Routing-->
         </dxm:MapControl>
     </Grid>
 </Window>
